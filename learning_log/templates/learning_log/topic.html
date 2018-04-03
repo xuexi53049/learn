@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>Topics:{{ topic }}</p>
+    <ul>
+    {% for t in entries %}
+    <li>
+        <p>{{ t.date_added|date:'M d, Y H:i' }}</p>
+        <div>{{ t|linebreaks }}</div>
+    <p><a href="{% url 'learning_log:edit_entry' t.id%}">编辑此条目</a></p>
+    </li>
+        {% empty %}
+        <li>没有内容</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'learning_log:new_entry' topic.id%}">添加内容</a>
+{% endblock %}
